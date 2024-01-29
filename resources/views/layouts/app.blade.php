@@ -1,14 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 @include('layouts.head')
 
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{{ asset("assets/admin_lte/dist/img/AdminLTELogo.png") }}" alt="AdminLTELogo" height="60" width="60">
-  </div>
+<body>
 
+<div class="wrapper">
   <!-- Navbar -->
   @include('layouts.navbar')
   <!-- /.navbar -->
@@ -17,7 +14,7 @@
   @include('layouts.sidebar')
 
   <!-- Content Wrapper. Contains page content -->
-  @include('layouts.header')
+  {{-- @include('layouts.main') --}}
 
   <!--start content-->
     <main class="page-content">
@@ -27,11 +24,7 @@
   
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.2.0
-    </div>
+    <strong>Copyright &copy; SMK Negeri 69 Jakarta</strong>
   </footer>
 
   <!-- Control Sidebar -->
@@ -40,7 +33,6 @@
   </aside>
   <!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->
 
 @include('layouts.foot')
 </body>

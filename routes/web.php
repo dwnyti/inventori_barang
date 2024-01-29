@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DataPeminjamController;
+use App\Http\Middleware\Authenticate;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', function () {
-    return view('login/login');
-});
+// Route::get('/', function () {
+//     return view('login/login');
+// });
 
-Route::get('/', function () {
+Route::get('/', [LoginController::class, 'index'])->name('login');
+Route::post('/login-store', [LoginController::class, 'login'])->name('login.store');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('/dashboard', function () {
     return view('index');
-});
+})->name('dashboard.index')->middleware('isLogin');
+
+Route::get('/data_peminjam', [DataPeminjamController::class, 'index'])->name('data_peminjam');
