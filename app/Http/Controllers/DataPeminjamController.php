@@ -11,7 +11,8 @@ class DataPeminjamController extends Controller
      */
     public function index()
     {
-        return view('data_peminjam.index');
+        $data['title'] = 'Data Peminjam';
+        return view('data_peminjam.index', $data);
     }
 
     /**
@@ -19,7 +20,8 @@ class DataPeminjamController extends Controller
      */
     public function create()
     {
-        //
+        $data['title'] = 'Create Data Peminjam';
+        return view('data_peminjam.create', $data);
     }
 
     /**

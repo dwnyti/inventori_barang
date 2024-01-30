@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DataPeminjamController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Middleware\Authenticate;
 
 /*
@@ -24,8 +25,7 @@ Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/login-store', [LoginController::class, 'login'])->name('login.store');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/dashboard', function () {
-    return view('index');
-})->name('dashboard.index')->middleware('isLogin');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('isLogin');
 
 Route::get('/data_peminjam', [DataPeminjamController::class, 'index'])->name('data_peminjam');
+Route::get('/data_peminjam/create', [DataPeminjamController::class, 'create'])->name('data_peminjam.create');
