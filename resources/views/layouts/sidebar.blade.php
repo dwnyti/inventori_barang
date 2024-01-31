@@ -53,7 +53,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="{{ route('data_peminjam') }}" class="nav-link {{ request()->routeIs('data_peminjam.index') ? 'active' : '' }}">
+          <a href="{{ route('data_peminjam.index') }}" class="nav-link {{ request()->routeIs('data_peminjam.index') ? 'active' : '' }}">
             <i class="nav-icon fa-solid fa-user"></i>
             <p>
               Data Peminjam

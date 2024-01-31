@@ -13,8 +13,8 @@
 <!-- Sparkline -->
 <script src="{{ asset("assets/admin_lte/plugins/sparklines/sparkline.js") }}"></script>
 <!-- JQVMap -->
-<script src="{{ asset("assets/admin_lte/plugins/jqvmap/jquery.vmap.min.js") }}"></script>
-<script src="{{ asset("assets/admin_lte/plugins/jqvmap/maps/jquery.vmap.usa.js") }}"></script>
+{{-- <script src="{{ asset("assets/admin_lte/plugins/jqvmap/jquery.vmap.min.js") }}"></script> --}}
+{{-- <script src="{{ asset("assets/admin_lte/plugins/jqvmap/maps/jquery.vmap.usa.js") }}"></script> --}}
 <!-- jQuery Knob Chart -->
 <script src="{{ asset("assets/admin_lte/plugins/jquery-knob/jquery.knob.min.js") }}"></script>
 <!-- daterangepicker -->
@@ -32,3 +32,7 @@
 <script src="{{ asset("assets/admin_lte/dist/js/demo.js") }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset("assets/admin_lte/dist/js/pages/dashboard.js") }}"></script>
+<!-- sweetalert2 js -->
+<script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+{{-- <script src="{{ asset("assets/admin_lte/plugins/sweetalert2/sweetalert2.js") }}"></script> --}}
+@stack('scripts')

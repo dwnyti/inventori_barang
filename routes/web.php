@@ -27,5 +27,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('isLogin');
 
-Route::get('/data_peminjam', [DataPeminjamController::class, 'index'])->name('data_peminjam');
-Route::get('/data_peminjam/create', [DataPeminjamController::class, 'create'])->name('data_peminjam.create');
+// Route::get('/data_peminjam', [DataPeminjamController::class, 'index'])->name('data_peminjam');
+// Route::get('/data_peminjam/create', [DataPeminjamController::class, 'create'])->name('data_peminjam.create');
+
+Route::resource('data_peminjam', DataPeminjamController::class);

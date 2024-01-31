@@ -15,7 +15,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col">
-          <a href="{{ route('data_peminjam.create') }}" type="button" class="btn btn-success mb-3 float-right">Add Data</a>
+          <a href="{{ route('data_peminjam.create') }}" type="button" class="btn btn-success mb-3 float-right"><i class="fa-solid fa-plus mr-2"></i> Add Data</a>
           <table class="table table-bordered">
             <thead>
               <tr class="text-center">
@@ -27,16 +27,19 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row" class="text-center">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td class="text-center">
-                  <button type="button" class="btn btn-warning"><i class="fa-solid fa-pen"></i></button>
-                  <button type="button" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
-                </td>
-              </tr>
+              @foreach ($data_peminjam as $data)
+                <tr>
+                  <th scope="row" class="text-center">{{ $loop->iteration }}</th>
+                  <td>{{ $data->nama }}</td>
+                  <td>{{ $data->status }}</td>
+                  <td>{{ $data->kelas }}</td>
+                  <td class="text-center">
+                    <a href="{{ route('data_peminjam.show', $data->id) }}" class="btn btn-success" title="show"><i class="fa-solid fa-eye"></i></a>
+                    <a href="{{ route('data_peminjam.edit', $data->id) }}" class="btn btn-warning" title="edit"><i class="fa-solid fa-pen"></i></a>
+                    <button type="button" class="btn btn-danger" title="delete" onclick="hapus()"><i class="fa-solid fa-trash"></i></button>
+                  </td>
+                </tr> 
+              @endforeach
             </tbody>
           </table>
         </div>
@@ -45,3 +48,12 @@
   </section>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+  import Swal from 'sweetalert2';
+  function hapus() {
+    Swal.fire("SweetAlert2 is working!");
+  }
+</script>
+@endpush
