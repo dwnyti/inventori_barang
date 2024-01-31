@@ -32,7 +32,13 @@
 <script src="{{ asset("assets/admin_lte/dist/js/demo.js") }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset("assets/admin_lte/dist/js/pages/dashboard.js") }}"></script>
-<!-- sweetalert2 js -->
-<script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
-{{-- <script src="{{ asset("assets/admin_lte/plugins/sweetalert2/sweetalert2.js") }}"></script> --}}
+
+{{-- SELECT2 --}}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+{{-- DATATABLE --}}
+<link href="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.css" rel="stylesheet">
+<script src="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.js"></script>
+
 @stack('scripts')

@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('container')
-<div class="content-wrapper">
-  <section class="content">
+{{-- <div class="content-wrapper"> --}}
+  {{-- <section class="content"> --}}
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -61,6 +61,6 @@
         <!-- ./col -->
       </div>
     </div>
-  </section>
-</div>
+  {{-- </section> --}}
+{{-- </div> --}}
 @endsection
