@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarangController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DataPeminjamController;
@@ -29,3 +30,4 @@ Route::get('/dashboard', function () {
 })->name('dashboard.index')->middleware('isLogin');
 
 Route::get('/data_peminjam', [DataPeminjamController::class, 'index'])->name('data_peminjam');
+Route::resource('/barang', BarangController::class);

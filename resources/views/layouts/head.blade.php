@@ -31,4 +31,8 @@
   <link rel="stylesheet" href="{{ asset("assets/admin_lte/plugins/select2/css/select2.min.css") }}">
   <!-- sweetalert2 css -->
   <link rel="stylesheet" href="{{ asset('assets/admin_lte/plugins/sweetalert2/sweetalert2.min.css') }}">
+
+  @stack('styles')
+
+  <title>{{ $page_title ?? 'Inventori Barang' }}</title>
 </head>
