@@ -14,8 +14,8 @@
                         </h4>
                     </div>
                     <div class="bd-highlight">
-                        <a href="{{ route('barang.create') }}" class="btn btn-warning">
-                            <i class="fa fa-plus me-2"></i> Tambah Barang
+                        <a href="{{ route('peminjaman_barang.create') }}" class="btn btn-warning">
+                            <i class="fa fa-plus me-2"></i> Tambah Peminjaman Barang
                         </a>
                     </div>
                 </div>
@@ -27,44 +27,35 @@
                             <thead class="table-primary">
                                 <tr class="text-center">
                                     <th>#</th>
-                                    <th>Nama Barang</th>
-                                    <th>Kode Barang</th>
-                                    <th>Gambar Barang</th>
-                                    <th>Lokasi Barang</th>
-                                    <th>Jumlah Barang</th>
+                                    <th>Nama Peminjam</th>
+                                    <th>Status Peminjam</th>
+                                    <th>Barang</th>
+                                    <th>Jumlah Dipinjam</th>
+                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($barang_barang as $barang)
+                                @foreach ($peminjaman_peminjaman as $peminjaman)
                                     <tr class="text-center">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $barang->nama_barang }}</td>
-                                        <td>{{ $barang->kode_barang }}</td>
+                                        <td>{{ $peminjaman->peminjam->nama_peminjam }}</td>
+                                        <td>{{ $peminjaman->peminjam->status }}</td>
+                                        <td>{{ $peminjaman->barang->nama_barang }}</td>
+                                        <td>{{ $peminjaman->status }}</td>
                                         <td>
-                                            @if ($barang->gambar_barang)
-                                                <img src="{{ asset('storage/gambar_barang/' . $barang->gambar_barang) }}"
-                                                    alt="{{ $barang->nama_barang }}" title="{{ $barang->nama_barang }}"
-                                                    width="100" height="auto">
-                                            @else
-                                                -
-                                            @endif
-                                        </td>
-                                        <td>{{ $barang->lokasi->nama_lokasi }}</td>
-                                        <td>{{ $barang->jumlah }}</td>
-                                        <td>
-                                            <a href="{{ route('barang.show', $barang->id) }}"
+                                            <a href="{{ route('peminjaman_barang.show', $peminjaman->id) }}"
                                                 class="btn btn-sm btn-success" data-bs-toggle="tooltip"
                                                 title="Show Product">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('barang.edit', $barang->id) }}"
+                                            <a href="{{ route('peminjaman_barang.edit', $peminjaman->id) }}"
                                                 class="btn btn-sm btn-warning" data-bs-toggle="tooltip"
                                                 title="Edit Product">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" title="Delete"
-                                                onclick="hapus('{{ $barang->id }}')">
+                                                onclick="hapus('{{ $peminjaman->id }}')">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </td>
@@ -98,7 +89,7 @@
                 if (result.isConfirmed) {
                     // Lakukan panggilan AJAX untuk menghapus data
                     $.ajax({
-                        url: '/barang/' + id, // Sesuaikan dengan URL delete di controller Anda
+                        url: '/peminjaman_barang/' + id, // Sesuaikan dengan URL delete di controller Anda
                         type: 'DELETE',
                         data: {
                             _token: '{{ csrf_token() }}' // Sertakan token CSRF dalam data

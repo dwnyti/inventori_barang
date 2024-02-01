@@ -50,7 +50,7 @@
                   <a href="{{ route('data_peminjam.edit', $data->id) }}" class="btn btn-warning" data-bs-toggle="tooltip" title="Edit">
                     <i class="fas fa-edit"></i>
                   </a>
-                  <button class="btn btn-danger" data-bs-toggle="tooltip" title="Delete" onclick="hapus('{{ $data->id }}')">
+                  <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" title="Delete" onclick="hapus('{{ $data->id }}')">
                     <i class="fas fa-trash"></i>
                   </button>    
                 </td>

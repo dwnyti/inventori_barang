@@ -6,11 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class DataPeminjam extends Model
+class PeminjamanBarang extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public function peminjaman_barang(){
-        return $this->hasMany(PeminjamanBarang::class);
+    public function barang(){
+        return $this->belongsTo(Barang::class);
+    }
+
+    public function peminjam(){
+        return $this->belongsTo(DataPeminjam::class);
     }
 }
