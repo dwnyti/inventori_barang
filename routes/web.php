@@ -32,3 +32,4 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 // Route::get('/data_peminjam/create', [DataPeminjamController::class, 'create'])->name('data_peminjam.create');
 
 Route::resource('data_peminjam', DataPeminjamController::class);
+Route::resource('barang', BarangController::class);

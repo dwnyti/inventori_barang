@@ -5,9 +5,6 @@
   <!-- Favicon -->
   <link rel="icon" href="{{ asset("assets/img/logo_sekolah.ico") }}">
 
-  <!-- Title -->
-  <title>{{ $title }}</title>
-
   <!-- Link CSS Local -->
   <link rel="stylesheet" href="style.css">
   <!-- Google Font: Source Sans Pro -->
@@ -33,11 +30,10 @@
   <link rel="stylesheet" href="{{ asset("assets/admin_lte/plugins/daterangepicker/daterangepicker.css") }}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset("assets/admin_lte/plugins/summernote/summernote-bs4.min.css") }}">
-  <!-- select2 css -->
-  <link rel="stylesheet" href="{{ asset("assets/select2/dist/css/select2.min.css") }}">
   <!-- sweetalert2 css -->
-  <link rel="stylesheet" href="{{ asset('assets/admin_lte/plugins/sweetalert2/sweetalert2.min.css') }}">
-
+  <link rel="stylesheet" href="{{ asset("assets/sweetalert2/dist/sweetalert2.min.css") }}">
+  <!-- Data Table -->
+  <link rel="stylesheet" href="{{ asset("assets/dataTables/datatables.min.css") }}">
   @stack('styles')
 
   <title>{{ $page_title ?? 'Inventori Barang' }}</title>

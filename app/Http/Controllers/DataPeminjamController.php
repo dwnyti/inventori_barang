@@ -12,7 +12,7 @@ class DataPeminjamController extends Controller
      */
     public function index()
     {
-        $data['title'] = 'Data Peminjam';
+        $data['page_title'] = 'Data Peminjam';
         $data['data_peminjam'] = DataPeminjam::all();
         return view('data_peminjam.index', $data);
     }
@@ -22,7 +22,7 @@ class DataPeminjamController extends Controller
      */
     public function create()
     {
-        $data['title'] = 'Create Data Peminjam';
+        $data['page_title'] = 'Create Data Peminjam';
         $data['data_peminjam'] = DataPeminjam::all();
         return view('data_peminjam.create', $data);
     }
@@ -51,9 +51,9 @@ class DataPeminjamController extends Controller
             }
 
             $data_peminjam->save();
-            return redirect()->route('data_peminjam.index');
+            return redirect()->route('data_peminjam.index')->with('successCreateData', 'Data berhasil ditambahkan!');
         } catch (\Throwable $th) {
-            return redirect()->route('data_peminjam.index')->with('failed', $th->getMessage());
+            return redirect()->route('data_peminjam.index')->with('failedCreateData', 'Data tidak berhasil ditambahkan!');
         }
     }
 
@@ -62,7 +62,7 @@ class DataPeminjamController extends Controller
      */
     public function show(string $id)
     {
-        $data['title'] = 'Show Data';
+        $data['page_title'] = 'Show Data';
         $data['show'] = DataPeminjam::findOrFail($id);
         return view('data_peminjam.show', $data);
     }
@@ -72,7 +72,7 @@ class DataPeminjamController extends Controller
      */
     public function edit(string $id)
     {
-        $data['title'] = 'Edit Data Peminjam';
+        $data['page_title'] = 'Edit Data Peminjam';
         $data['data_peminjam'] = DataPeminjam::findOrFail($id);
         return view('data_peminjam.edit', $data);
     }
@@ -100,17 +100,32 @@ class DataPeminjamController extends Controller
             }
 
             $data_peminjam->save();
-            return redirect()->route('data_peminjam.index');
+            return redirect()->route('data_peminjam.index')->with('successEditData', 'Data berhasil diedit!');
         } catch (\Throwable $th) {
-            return redirect()->route('data_peminjam.index')->with('failed', $th->getMessage());
+            return redirect()->route('data_peminjam.index')->with('failedEditData', 'Data tidak berhasil diedit!');
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
+    // public function destroy(string $id)
+    // {
+    //     try {
+    //         DataPeminjam::destroy($id);
+    //         return response()->json(['success' => true]);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['success' => false]);
+    //     }
+    // }
+
     public function destroy(string $id)
     {
-        DataPeminjam::destroy($id);
+        try {
+            DataPeminjam::destroy($id);
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false]);
+        }
     }
 }

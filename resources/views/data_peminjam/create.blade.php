@@ -1,62 +1,85 @@
 @extends('layouts.app')
 
 @section('container')
-<div class="content-wrapper">
-  <section class="content">
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Create Data</h1>
-          </div>
-        </div>
-      </div>
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header bg-primary">
+      <h4 class="fw-bold">
+        <i class="nav-icon fa-solid fa-user"></i> {{ $page_title }}
+      </h4>
     </div>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <form method="POST" action="{{ route('data_peminjam.store') }}">
-                @csrf
-                <div class="mb-3">
-                  <label for="nama" class="form-label">Nama</label>
-                  <input type="text" class="form-control" id="nama" name="nama">
-                </div>
-                <div class="mb-3">
-                  <label for="status" class="form-label">Status</label>
-                  <select class="form-select" aria-label="Default select example" name="status" id="status">
-                    <option selected>Pilih Status</option>
-                    <option value="guru">Guru</option>
-                    <option value="staff">Staff Tata Usaha</option>
-                    <option value="siswa">Siswa</option>
-                  </select>
-                </div>
-                <div class="mb-3" id="kelas" style="display: none">
-                  <label for="kelas" class="form-label">Kelas</label>
-                  <select class="form-select" aria-label="Default select example" name="kelas">
-                    <option selected value="-">Pilih Kelas</option>
-                    <option value="X SIJA 1">X SIJA 1</option>
-                    <option value="X SIJA 2">X SIJA 2</option>
-                    <option value="XI SIJA 1">XI SIJA 1</option>
-                    <option value="XI SIJA 2">XI SIJA 2</option>
-                    <option value="XII SIJA 1">XII SIJA 1</option>
-                    <option value="XII SIJA 2">XII SIJA 2</option>
-                  </select>
-                </div>
-                <button type="submit" class="btn btn-primary mt-3">Submit</button>
-              </form>
+    <div class="card-body">
+      <form action="{{ route('data_peminjam.store') }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <div class="row">
+          <div class="col">
+            <div class="mb-3">
+              <label for="nama" class="form-label">Nama</label>
+              <input type="text" class="form-control" id="nama" name="nama">
+              @error('nama')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+            </div>
+            <div class="mb-3">
+              <label for="status" class="form-label">Status</label>
+              {{-- <select class="form-select js-example-basic-single" name="status" id="status">
+                <option value="guru">Guru</option>
+                <option value="staff">Staff Tata Usaha</option>
+                <option value="siswa">Siswa</option>
+              </select> --}}
+              <select class="form-select" aria-label="Default select example" name="status" id="status">
+                <option selected>Pilih Status</option>
+                <option value="guru">Guru</option>
+                <option value="staff">Staff Tata Usaha</option>
+                <option value="siswa">Siswa</option>
+              </select>
+              @error('status')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+            </div>
+            <div class="mb-3" id="kelas" style="display: none">
+              <label for="kelas" class="form-label">Kelas</label>
+              <select class="form-select" aria-label="Default select example" name="kelas">
+                <option selected value="-">Pilih Kelas</option>
+                <option value="X SIJA 1">X SIJA 1</option>
+                <option value="X SIJA 2">X SIJA 2</option>
+                <option value="XI SIJA 1">XI SIJA 1</option>
+                <option value="XI SIJA 2">XI SIJA 2</option>
+                <option value="XII SIJA 1">XII SIJA 1</option>
+                <option value="XII SIJA 2">XII SIJA 2</option>
+              </select>
+              @error('kelas')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
             </div>
           </div>
-        </div>
-      </div>
+        <div>
+      </form>
     </div>
-  </section>
-</div>
+    <div class="card-footer">
+      <a href="{{ route('data_peminjam.index') }}" class="btn btn-sm btn-secondary me-2">
+        <i class="fa fa-arrow-left me-2"></i> Kembali
+      </a>
+      <button class="btn btn-sm btn-primary" type="submit">
+        <i class="fa fa-paper-plane me-2"></i> Simpan
+      </button>
+    </div>
+  </div>
+</div> 
 @endsection
 
 @push('scripts')
 <script>
+  // $('.js-example-basic-single').select2({
+  //   placeholder: 'Select an option'
+  // });
+  // $(".js-example-basic-single").select2({
+  //   maximumSelectionLength: 2
+  // });
+  $(document).ready(function() {
+    $('.js-example-basic-single').select2();
+  });
+
   // Mendapatkan elemen dropdown status
   var statusDropdown = document.getElementById('status');
 
