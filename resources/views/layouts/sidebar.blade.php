@@ -56,7 +56,7 @@
           <a href="{{ route('data_peminjam.index') }}" class="nav-link {{ request()->routeIs('data_peminjam.index') ? 'active' : '' }}">
             <i class="nav-icon fa-solid fa-user"></i>
             <p>
-              Data Peminjam
+              Data Peminjam Online
             </p>
           </a>
         </li>
@@ -71,14 +71,14 @@
         </li>
       
         <li class="nav-item">
-          <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+          <a href="{{ route('logout') }}" class="nav-link" onclick="logout(event)">
             <i class="nav-icon fa-solid fa-right-from-bracket"></i>
             <p>
               Logout
             </p>
           </a>
           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-              @csrf
+            @csrf
           </form>
         </li>
       </ul>
@@ -87,3 +87,25 @@
   </div>
   <!-- /.sidebar -->
 </aside>
+
+@push('scripts')
+<script>
+  function logout(event) {
+    event.preventDefault();
+    Swal.fire({
+      title: "Do you want to logout?",
+      showDenyButton: true,
+      confirmButtonText: "Yes",
+      denyButtonText: `No`
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        // Lakukan submit form secara manual
+        document.getElementById('logout-form').submit();
+      } else if (result.isDenied) {
+        Swal.fire("Logout canceled", "", "info");
+      }
+    });
+  }
+</script>
+@endpush

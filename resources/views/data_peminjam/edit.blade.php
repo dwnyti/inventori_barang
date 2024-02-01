@@ -16,24 +16,24 @@
           <div class="col">
             <div class="mb-3">
               <label for="nama" class="form-label">Nama</label>
-              <input type="text" class="form-control" id="nama" name="nama" value="{{ $data_peminjam->nama }}">
+              <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ $data_peminjam->nama }}">
               @error('nama')
                 <span class="text-danger">{{ $message }}</span>
               @enderror
             </div>
             <div class="mb-3">
               <label for="status" class="form-label">Status</label>
-              <select class="form-select" aria-label="Default select example" name="status" id="status">
+              <select class="form-select @error('status') is-invalid @enderror" aria-label="Default select example" name="status" id="status">
                 <option selected>Pilih Status</option>
-                <option value="guru" {{ $data_peminjam->status === 'guru' ? 'selected' : '' }}>Guru</option>
-                <option value="staff" {{ $data_peminjam->status === 'staff' ? 'selected' : '' }}>Staff Tata Usaha</option>
-                <option value="siswa" {{ $data_peminjam->status === 'siswa' ? 'selected' : '' }}>Siswa</option>
+                <option value="Guru" {{ $data_peminjam->status === 'Guru' ? 'selected' : '' }}>Guru</option>
+                <option value="Staff" {{ $data_peminjam->status === 'Staff' ? 'selected' : '' }}>Staff Tata Usaha</option>
+                <option value="Siswa" {{ $data_peminjam->status === 'Siswa' ? 'selected' : '' }}>Siswa</option>
               </select>
               @error('status')
                 <span class="text-danger">{{ $message }}</span>
               @enderror
             </div>
-            <div class="mb-3" id="kelas" style="{{ $data_peminjam->status === 'siswa' ? '' : 'display: none' }}">
+            <div class="mb-3" id="kelas" style="{{ $data_peminjam->status === 'Siswa' ? '' : 'display: none' }}">
               <label for="kelas" class="form-label">Kelas</label>
               <select class="form-select" aria-label="Default select example" name="kelas">
                 <option selected value="-">Pilih Kelas</option>

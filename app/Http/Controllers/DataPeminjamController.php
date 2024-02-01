@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DataPeminjam;
+use Illuminate\Validation\Rule;
 
 class DataPeminjamController extends Controller
 {
@@ -35,7 +36,7 @@ class DataPeminjamController extends Controller
         // dd($request->all());
         $request->validate([
             'nama' => 'required',
-            'status' => 'required',
+            'status' => 'required|in:Guru,Staff,Siswa',
             'kelas' => 'nullable'
         ]);
 
@@ -44,7 +45,7 @@ class DataPeminjamController extends Controller
             $data_peminjam->nama = $request->input('nama');
             $data_peminjam->status = $request->input('status');
             
-            if ($data_peminjam->status === 'siswa') {
+            if ($data_peminjam->status === 'Siswa') {
                 $data_peminjam->kelas = $request->input('kelas');
             } else {
                 $data_peminjam->kelas = '-';
@@ -93,7 +94,7 @@ class DataPeminjamController extends Controller
             $data_peminjam->nama = $request->input('nama');
             $data_peminjam->status = $request->input('status');
             
-            if ($data_peminjam->status === 'siswa') {
+            if ($data_peminjam->status === 'Siswa') {
                 $data_peminjam->kelas = $request->input('kelas');
             } else {
                 $data_peminjam->kelas = '-';

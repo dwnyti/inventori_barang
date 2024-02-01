@@ -31,7 +31,7 @@
               <tr class="text-center">
                 <th scope="col">No</th>
                 <th scope="col">Nama Peminjam</th>
-                <th scope="col">Status</th>
+                <th scope="col">Status Peminjam</th>
                 <th scope="col">Kelas</th>
                 <th scope="col">Aksi</th>
               </tr>
@@ -44,9 +44,9 @@
                 <td>{{ $data->status }}</td>
                 <td>{{ $data->kelas }}</td>
                 <td>
-                  <a href="" class="btn btn-success" data-bs-toggle="tooltip" title="Show">
+                  <button type="button" class="btn btn-success" title="Show" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <i class="fas fa-eye"></i>
-                  </a>
+                  </button>
                   <a href="{{ route('data_peminjam.edit', $data->id) }}" class="btn btn-warning" data-bs-toggle="tooltip" title="Edit">
                     <i class="fas fa-edit"></i>
                   </a>
@@ -58,9 +58,26 @@
               @endforeach
           </tbody>
           </table>
+        </div>
       </div>
+    </div>
+
+    {{-- modal --}}
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          {{-- <div class="modal-body">
+            <h6>Nama Peminjam: {{ $data->nama }}</h6>
+            <h6>Status Peminjam: {{ $data->status }}</h6>
+            <h6>Kelas: {{ $data->kelas }}</h6>
+          </div> --}}
+        </div>
       </div>
-  </div>
+    </div>
   </div>
 </div>
 @endsection

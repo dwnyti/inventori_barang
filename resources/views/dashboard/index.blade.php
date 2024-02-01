@@ -18,7 +18,7 @@
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3>0</h3>
+              <h3>{{ $barang }}</h3>
 
               <p>Data Barang</p>
             </div>
@@ -33,7 +33,7 @@
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3>0</h3>
+              <h3>{{ $data_peminjam }}</h3>
 
               <p>Data Peminjam</p>
             </div>
