@@ -44,13 +44,13 @@
                 <td>{{ $data->status }}</td>
                 <td>{{ $data->kelas }}</td>
                 <td>
-                  <a href="" class="btn btn-success" data-bs-toggle="tooltip" title="Show">
+                  <a href="" class="btn btn-sm btn-success" data-bs-toggle="tooltip" title="Show">
                     <i class="fas fa-eye"></i>
                   </a>
-                  <a href="{{ route('data_peminjam.edit', $data->id) }}" class="btn btn-warning" data-bs-toggle="tooltip" title="Edit">
+                  <a href="{{ route('data_peminjam.edit', $data->id) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Edit">
                     <i class="fas fa-edit"></i>
                   </a>
-                  <button class="btn btn-danger" data-bs-toggle="tooltip" title="Delete" onclick="hapus('{{ $data->id }}')">
+                  <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" title="Delete" onclick="hapus('{{ $data->id }}')">
                     <i class="fas fa-trash"></i>
                   </button>    
                 </td>

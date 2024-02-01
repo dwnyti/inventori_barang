@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@push('styles')
+@endpush
+
 @section('container')
     <div class="container-fluid">
         <div class="card">
@@ -27,9 +30,9 @@
                                     <th>Nama Barang</th>
                                     <th>Kode Barang</th>
                                     <th>Gambar Barang</th>
-                                    <th>Jumlah Barang</th>
                                     <th>Lokasi Barang</th>
-                                    <th>Aksi</th>   
+                                    <th>Jumlah Barang</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -38,20 +41,30 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $barang->nama_barang }}</td>
                                         <td>{{ $barang->kode_barang }}</td>
-                                        <td>{{ $barang->gambar_barang }}</td>
-                                        <td>{{ $barang->jumlah }}</td>
-                                        <td>{{ $barang->lokasi_id }}</td>
                                         <td>
-                                            <a href="" class="btn btn-success" data-bs-toggle="tooltip"
+                                            @if ($barang->gambar_barang)
+                                                <img src="{{ asset('storage/gambar_barang/' . $barang->gambar_barang) }}"
+                                                    alt="{{ $barang->nama_barang }}" title="{{ $barang->nama_barang }}"
+                                                    width="100" height="auto">
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                        <td>{{ $barang->lokasi->nama_lokasi }}</td>
+                                        <td>{{ $barang->jumlah }}</td>
+                                        <td>
+                                            <a href="{{ route('barang.show', $barang->id) }}"
+                                                class="btn btn-sm btn-success" data-bs-toggle="tooltip"
                                                 title="Show Product">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="" class="btn btn-warning" data-bs-toggle="tooltip"
+                                            <a href="{{ route('barang.edit', $barang->id) }}"
+                                                class="btn btn-sm btn-warning" data-bs-toggle="tooltip"
                                                 title="Edit Product">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <button class="btn btn-danger mx-1" data-bs-toggle="tooltip"
-                                                {{-- onclick="modalDelete('Product', 'Product {{ $barang->nama_barang }}', '{{ route('product-management.destroy', $barang->id) }}', '{{ route('product-management.index') }}')" --}} title="Delete Product">
+                                            <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" title="Delete"
+                                                onclick="hapus('{{ $barang->id }}')">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </td>
@@ -71,5 +84,53 @@
         $(document).ready(function() {
             new DataTable("#tabel-barang");
         })
+
+        function hapus(id) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Lakukan panggilan AJAX untuk menghapus data
+                    $.ajax({
+                        url: '/barang/' + id, // Sesuaikan dengan URL delete di controller Anda
+                        type: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}' // Sertakan token CSRF dalam data
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: "Your data has been deleted.",
+                                    icon: "success"
+                                }).then(() => {
+                                    // Redirect atau lakukan tindakan lain setelah penghapusan berhasil
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: "Error",
+                                    text: "Failed to delete the data.",
+                                    icon: "error"
+                                });
+                            }
+                        },
+                        error: function() {
+                            Swal.fire({
+                                title: "Error",
+                                text: "Failed to delete the data.",
+                                icon: "error"
+                            });
+                        }
+                    });
+                }
+            });
+        }
     </script>
 @endpush

@@ -8,7 +8,8 @@
                     <i class="fa-solid fa-boxes-stacked me-2"></i> {{ $page_title }}
                 </h4>
             </div>
-            <form action="{{ route('barang.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('barang.update', $barang->id) }}" method="post" enctype="multipart/form-data">
+                @method('patch')
                 @csrf
                 <div class="card-body">
                     <div class="row">
@@ -18,7 +19,7 @@
                                 <label for="nama_barang" class="form-label">Nama Barang</label>
                                 <input type="text" id="nama_barang" name="nama_barang"
                                     class="form-control @error('nama_barang') is-invalid @enderror"
-                                    placeholder="Masukkan nama barang" value="{{ old('nama_barang') }}">
+                                    placeholder="Masukkan nama barang" value="{{ old('nama_barang', $barang->nama_barang) }}">
                                 @error('nama_barang')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -29,7 +30,7 @@
                                 <label for="kode_barang" class="form-label">Kode Barang</label>
                                 <input type="text" id="kode_barang" name="kode_barang"
                                     class="form-control @error('kode_barang') is-invalid @enderror"
-                                    placeholder="Masukkan kode barang" value="{{ old('kode_barang') }}">
+                                    placeholder="Masukkan kode barang" value="{{ old('kode_barang', $barang->kode_barang) }}">
                                 @error('kode_barang')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -38,7 +39,7 @@
                             {{-- GAMBAR BARANG --}}
                             <div class="mb-3">
                                 <label for="gambar_barang" class="form-label">Gambar Barang</label>
-                                <img src="" alt="" class="mb-2 img-fluid preview_barang d-block">
+                                <img @if($barang->gambar_barang) src="{{ asset('storage/gambar_barang/' . $barang->gambar_barang) }}" alt="{{ $barang->nama_barang }}" width="200" height="auto" @endif class="mb-2 img-fluid preview_barang d-block">
                                 <input type="file" id="gambar_barang" name="gambar_barang"
                                     class="form-control @error('gambar_barang') is-invalid @enderror" accept="image/*">
                                 <small class="text-secondary">Pastikan upload dengan format file image</small>
@@ -53,7 +54,7 @@
                                 <label for="jumlah" class="form-label">Jumlah Barang</label>
                                 <input type="number" id="jumlah" name="jumlah"
                                     class="form-control @error('jumlah') is-invalid @enderror"
-                                    placeholder="Masukkan jumlah barang" value="{{ old('jumlah') }}">
+                                    placeholder="Masukkan jumlah barang" value="{{ old('jumlah', $barang->jumlah) }}">
                                 @error('jumlah')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -66,7 +67,7 @@
                                     <option value="" selected disabled>Pilih lokasi barang</option>
                                     @foreach ($lokasi_lokasi as $lokasi)
                                         <option value="{{ $lokasi->id }}"
-                                            {{ $lokasi->id == old('lokasi_id') ? 'selected' : '' }}>
+                                            {{ $lokasi->id == old('lokasi_id', $barang->lokasi_id) ? 'selected' : '' }}>
                                             {{ $lokasi->nama_lokasi }}</option>
                                     @endforeach
                                 </select>
