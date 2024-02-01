@@ -15,19 +15,14 @@
           <div class="col">
             <div class="mb-3">
               <label for="nama" class="form-label">Nama</label>
-              <input type="text" class="form-control" id="nama" name="nama">
+              <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ old("nama") }}" placeholder="Input Nama...">
               @error('nama')
                 <span class="text-danger">{{ $message }}</span>
               @enderror
             </div>
             <div class="mb-3">
               <label for="status" class="form-label">Status</label>
-              {{-- <select class="form-select js-example-basic-single" name="status" id="status">
-                <option value="guru">Guru</option>
-                <option value="staff">Staff Tata Usaha</option>
-                <option value="siswa">Siswa</option>
-              </select> --}}
-              <select class="form-select" aria-label="Default select example" name="status" id="status">
+              <select class="form-select @error('status') is-invalid @enderror" aria-label="Default select example" name="status" id="status">
                 <option selected>Pilih Status</option>
                 <option value="guru">Guru</option>
                 <option value="staff">Staff Tata Usaha</option>
