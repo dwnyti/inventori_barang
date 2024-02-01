@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('data_peminjams', function (Blueprint $table) {
+        Schema::create('peminjaman_barangs', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->integer('barang_id')->nullable();
+            $table->integer('peminjam_id')->nullable();
+            $table->integer('jumlah_pinjam');
+            $table->date('tanggal_pinjam');
+            $table->date('tanggal_pengembalian')->nullable();
             $table->string('status');
-            $table->string('kelas')->nullable();
+            $table->string('catatan')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('data_peminjams');
+        Schema::dropIfExists('peminjaman_barangs');
     }
 };

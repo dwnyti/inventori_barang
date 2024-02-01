@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DataPeminjamController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PeminjamanBarangController;
 use App\Http\Middleware\Authenticate;
 
 /*
@@ -33,3 +34,4 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 
 Route::resource('data_peminjam', DataPeminjamController::class);
 Route::resource('barang', BarangController::class);
+Route::resource('peminjaman_barang', PeminjamanBarangController::class);

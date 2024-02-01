@@ -44,7 +44,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="{{ route('barang.index') }}" class="nav-link">
+          <a href="{{ route('barang.index') }}" class="nav-link {{ request()->routeIs('barang.index') ? 'active' : '' }}">
             <i class="nav-icon fa-solid fa-boxes-stacked"></i>
             <p>
               Data Barang
@@ -62,7 +62,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="" class="nav-link">
+          <a href="{{ route('peminjaman_barang.index') }}" class="nav-link {{ request()->routeIs('peminjaman_barang.index') ? 'active' : '' }}">
             <i class="nav-icon fa-regular fa-file"></i>
             <p>
               Peminjaman Barang
