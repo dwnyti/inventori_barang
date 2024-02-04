@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Barang;
 use App\Models\DataPeminjam;
+use App\Models\PeminjamanBarang;
 
 class DashboardController extends Controller
 {
@@ -16,6 +17,7 @@ class DashboardController extends Controller
         $data['title'] = 'Dashboard';
         $data['barang'] = Barang::count();
         $data['data_peminjam'] = DataPeminjam::count();
+        $data['peminjaman_barang'] = PeminjamanBarang::count();
         return view('dashboard.index', $data);
     }
 

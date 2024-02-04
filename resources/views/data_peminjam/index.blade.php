@@ -16,7 +16,7 @@
           </h4>
         </div>
         <div class="bd-highlight">
-          <a href="{{ route('data_peminjam.create') }}" class="btn btn-warning">
+          <a href="{{ route('data_peminjam.create') }}" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-title="Tambah Data">
             <i class="fa fa-plus me-2"></i> Tambah Data
           </a>
         </div>
@@ -44,13 +44,13 @@
                 <td>{{ $data->status }}</td>
                 <td>{{ $data->kelas }}</td>
                 <td>
-                  <button type="button" class="btn btn-success" title="Show" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <a href="{{ route("data_peminjam.show", $data->id) }}" class="btn btn-sm btn-success" data-bs-toggle="tooltip" data-bs-title="Show Data">
                     <i class="fas fa-eye"></i>
-                  </button>
-                  <a href="{{ route('data_peminjam.edit', $data->id) }}" class="btn btn-warning" data-bs-toggle="tooltip" title="Edit">
+                  </a>
+                  <a href="{{ route("data_peminjam.edit", $data->id) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" data-bs-title="Edit Data">
                     <i class="fas fa-edit"></i>
                   </a>
-                  <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" title="Delete" onclick="hapus('{{ $data->id }}')">
+                  <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-title="Delete Data" onclick="hapus('{{ $data->id }}')">
                     <i class="fas fa-trash"></i>
                   </button>    
                 </td>
@@ -58,23 +58,6 @@
               @endforeach
           </tbody>
           </table>
-        </div>
-      </div>
-    </div>
-
-    {{-- modal --}}
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          {{-- <div class="modal-body">
-            <h6>Nama Peminjam: {{ $data->nama }}</h6>
-            <h6>Status Peminjam: {{ $data->status }}</h6>
-            <h6>Kelas: {{ $data->kelas }}</h6>
-          </div> --}}
         </div>
       </div>
     </div>

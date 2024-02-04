@@ -11,8 +11,11 @@
     body {
       background-color: #265073;
     }
-    div.card {
-      box-shadow: 0 4px 30px 0 rgba(0, 0, 0, 0.2);
+    div.container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
   </style>
   <title>Login</title>
@@ -20,12 +23,8 @@
 <body>
   <div class="container">
     <div class="row">
-      <div class="col-4 mt-5 mx-auto">
-        {{-- <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <strong>Please Login!</strong>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div> --}}
-        <div class="card">
+      <div class="col">
+        <div class="card" style="width: 22rem">
           <div class="card-body">
             <img src="{{ asset("assets/img/logo.png") }}" alt="logo sekolah" class="mb-3 mx-auto d-block" width="70">
             <div class="text-center">
