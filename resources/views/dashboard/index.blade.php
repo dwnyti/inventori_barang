@@ -18,7 +18,7 @@
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3>0</h3>
+              <h3>{{ $barang }}</h3>
 
               <p>Data Barang</p>
             </div>
@@ -33,7 +33,7 @@
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3>0</h3>
+              <h3>{{ $data_peminjam }}</h3>
 
               <p>Data Peminjam</p>
             </div>
@@ -48,14 +48,14 @@
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>0</h3>
+              <h3>{{ $peminjaman_barang }}</h3>
 
               <p>Data Peminjaman Barang</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="{{ route('peminjaman_barang.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->

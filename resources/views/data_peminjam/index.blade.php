@@ -16,7 +16,7 @@
           </h4>
         </div>
         <div class="bd-highlight">
-          <a href="{{ route('data_peminjam.create') }}" class="btn btn-warning">
+          <a href="{{ route('data_peminjam.create') }}" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-title="Tambah Data">
             <i class="fa fa-plus me-2"></i> Tambah Data
           </a>
         </div>
@@ -31,7 +31,7 @@
               <tr class="text-center">
                 <th scope="col">No</th>
                 <th scope="col">Nama Peminjam</th>
-                <th scope="col">Status</th>
+                <th scope="col">Status Peminjam</th>
                 <th scope="col">Kelas</th>
                 <th scope="col">Aksi</th>
               </tr>
@@ -44,13 +44,13 @@
                 <td>{{ $data->status }}</td>
                 <td>{{ $data->kelas }}</td>
                 <td>
-                  <a href="" class="btn btn-sm btn-success" data-bs-toggle="tooltip" title="Show">
+                  <a href="{{ route("data_peminjam.show", $data->id) }}" class="btn btn-sm btn-success" data-bs-toggle="tooltip" data-bs-title="Show Data">
                     <i class="fas fa-eye"></i>
                   </a>
-                  <a href="{{ route('data_peminjam.edit', $data->id) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Edit">
+                  <a href="{{ route("data_peminjam.edit", $data->id) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" data-bs-title="Edit Data">
                     <i class="fas fa-edit"></i>
                   </a>
-                  <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" title="Delete" onclick="hapus('{{ $data->id }}')">
+                  <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-title="Delete Data" onclick="hapus('{{ $data->id }}')">
                     <i class="fas fa-trash"></i>
                   </button>    
                 </td>
@@ -58,9 +58,9 @@
               @endforeach
           </tbody>
           </table>
+        </div>
       </div>
-      </div>
-  </div>
+    </div>
   </div>
 </div>
 @endsection
