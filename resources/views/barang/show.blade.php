@@ -67,7 +67,7 @@
                         <div class="mb-3">
                             <label for="lokasi_id" class="form-label">Lokasi Barang</label>
                             <select id="lokasi_id" name="lokasi_id" disabled
-                                class="form-control @error('lokasi_id') is-invalid @enderror">
+                                class="form-select @error('lokasi_id') is-invalid @enderror">
                                 <option value="" selected>{{ $barang->lokasi->nama_lokasi }}</option>
                                 {{-- @foreach ($lokasi_lokasi as $lokasi)
                                     <option value="{{ $lokasi->id }}"

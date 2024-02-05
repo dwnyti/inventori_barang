@@ -40,7 +40,7 @@ class BarangController extends Controller
             'nama_barang' => 'required',
             'kode_barang' => 'required|unique:barangs',
             'gambar_barang' => 'nullable',
-            'jumlah' => 'required',
+            'jumlah' => 'required|numeric',
             'lokasi_id' => 'required',
         ]);
 
@@ -100,7 +100,7 @@ class BarangController extends Controller
             'nama_barang' => 'required',
             'kode_barang' => 'required|unique:barangs,kode_barang,' . $id,
             'gambar_barang' => 'nullable',
-            'jumlah' => 'required',
+            'jumlah' => 'required|numeric',
             'lokasi_id' => 'required',
         ]);
 

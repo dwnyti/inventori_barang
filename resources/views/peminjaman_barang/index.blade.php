@@ -5,12 +5,17 @@
 
 @section('container')
     <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                @include('alert.alert-message')
+            </div>
+        </div>
         <div class="card">
             <div class="card-header bg-primary">
                 <div class="d-flex">
                     <div class="me-auto bd-highlight">
                         <h4 class="fw-bold">
-                            <i class="fa-solid fa-boxes-stacked me-2"></i> {{ $page_title }}
+                            <i class="fa-solid fa-boxes-packing me-2"></i> {{ $page_title }}
                         </h4>
                     </div>
                     <div class="bd-highlight">
@@ -23,13 +28,14 @@
             <div class="card-body">
                 <div class="content-header">
                     <div class="table-responsive">
-                        <table id="tabel-barang" class="table table-striped table-hover">
+                        <table id="tabel-peminjaman-barang" class="table table-striped table-hover">
                             <thead class="table-primary">
                                 <tr class="text-center">
                                     <th>#</th>
-                                    <th>Nama Peminjam</th>
+                                    <th>Peminjam</th>
                                     <th>Status Peminjam</th>
                                     <th>Barang</th>
+                                    <th>Kode Barang</th>
                                     <th>Jumlah Dipinjam</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
@@ -39,22 +45,30 @@
                                 @foreach ($peminjaman_peminjaman as $peminjaman)
                                     <tr class="text-center">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $peminjaman->peminjam->nama_peminjam }}</td>
+                                        <td>{{ $peminjaman->peminjam->nama }}</td>
                                         <td>{{ $peminjaman->peminjam->status }}</td>
                                         <td>{{ $peminjaman->barang->nama_barang }}</td>
-                                        <td>{{ $peminjaman->status }}</td>
+                                        <td>{{ $peminjaman->barang->kode_barang }}</td>
+                                        <td>{{ $peminjaman->jumlah_pinjam }}</td>
                                         <td>
+                                            <span class="badge @if($peminjaman->status === 'Masih dipinjam') text-bg-warning @else text-bg-danger @endif">{{ $peminjaman->status }}</span>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info mb-1" data-bs-toggle="tooltip" title="Delete"
+                                                onclick="hapus('{{ $peminjaman->id }}')">
+                                                <i class="fas fa-box-archive"></i>
+                                            </button>
                                             <a href="{{ route('peminjaman_barang.show', $peminjaman->id) }}"
-                                                class="btn btn-sm btn-success" data-bs-toggle="tooltip"
+                                                class="btn btn-sm btn-success mb-1" data-bs-toggle="tooltip"
                                                 title="Show Product">
                                                 <i class="fas fa-eye"></i>
                                             </a>
                                             <a href="{{ route('peminjaman_barang.edit', $peminjaman->id) }}"
-                                                class="btn btn-sm btn-warning" data-bs-toggle="tooltip"
+                                                class="btn btn-sm btn-warning mb-1" data-bs-toggle="tooltip"
                                                 title="Edit Product">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" title="Delete"
+                                            <button class="btn btn-sm btn-danger mb-1" data-bs-toggle="tooltip" title="Delete"
                                                 onclick="hapus('{{ $peminjaman->id }}')">
                                                 <i class="fas fa-trash"></i>
                                             </button>
@@ -73,7 +87,7 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            new DataTable("#tabel-barang");
+            new DataTable("#tabel-peminjaman-barang");
         })
 
         function hapus(id) {

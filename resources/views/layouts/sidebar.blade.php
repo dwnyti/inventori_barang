@@ -63,7 +63,7 @@
 
         <li class="nav-item">
           <a href="{{ route('peminjaman_barang.index') }}" class="nav-link {{ request()->routeIs('peminjaman_barang.index') ? 'active' : '' }}">
-            <i class="nav-icon fa-regular fa-file"></i>
+            <i class="nav-icon fa-solid fa-boxes-packing"></i>
             <p>
               Peminjaman Barang
             </p>

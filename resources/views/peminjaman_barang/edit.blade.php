@@ -8,7 +8,8 @@
                     <i class="fa-solid fa-boxes-packing me-2"></i> {{ $page_title }}
                 </h4>
             </div>
-            <form action="{{ route('peminjaman_barang.store') }}" method="post">
+            <form action="{{ route('peminjaman_barang.update', $peminjaman_barang->id) }}" method="post">
+                @method('patch')
                 @csrf
                 <div class="card-body">
                     {{-- NAMA PEMINJAM --}}
@@ -19,7 +20,7 @@
                             <option value="" selected disabled>Pilih peminjam</option>
                             @foreach ($peminjam_peminjam as $peminjam)
                                 <option value="{{ $peminjam->id }}"
-                                    {{ $peminjam->id == old('peminjam_id') ? 'selected' : '' }}>
+                                    {{ $peminjam->id == old('peminjam_id', $peminjaman_barang->peminjam_id) ? 'selected' : '' }}>
                                     {{ $peminjam->nama }}</option>
                             @endforeach
                         </select>
@@ -35,7 +36,8 @@
                             class="form-select @error('barang_id') is-invalid @enderror">
                             <option value="" selected disabled>Pilih barang</option>
                             @foreach ($barang_barang as $barang)
-                                <option value="{{ $barang->id }}" {{ $barang->id == old('barang_id') ? 'selected' : '' }}>
+                                <option value="{{ $barang->id }}"
+                                    {{ $barang->id == old('barang_id', $peminjaman_barang->barang_id) ? 'selected' : '' }}>
                                     {{ $barang->nama_barang }}</option>
                             @endforeach
                         </select>
@@ -49,7 +51,8 @@
                         <label for="jumlah_pinjam" class="form-label">Jumlah Pinjam Barang</label>
                         <input type="number" id="jumlah_pinjam" name="jumlah_pinjam"
                             class="form-control @error('jumlah_pinjam') is-invalid @enderror"
-                            placeholder="Masukkan kode barang" value="{{ old('jumlah_pinjam') }}">
+                            placeholder="Masukkan kode barang"
+                            value="{{ old('jumlah_pinjam', $peminjaman_barang->jumlah_pinjam) }}">
                         @error('jumlah_pinjam')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -59,7 +62,7 @@
                     <div class="mb-3">
                         <label for="catatan" class="form-label">Catatan</label>
                         <textarea name="catatan" id="catatan" cols="3" rows="3"
-                            class="form-control @error('catatan') is-invalid @enderror" placeholder="Masukkan catatan">{{ old('catatan') }}</textarea>
+                            class="form-control @error('catatan') is-invalid @enderror" placeholder="Masukkan catatan">{{ old('catatan', $peminjaman_barang->catatan) }}</textarea>
                         @error('catatan')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
