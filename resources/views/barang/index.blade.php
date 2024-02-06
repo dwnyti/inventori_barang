@@ -67,7 +67,7 @@
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" title="Delete"
-                                                onclick="hapus('{{ $barang->id }}')">
+                                                onclick="hapus('{{ route('barang.destroy', $barang->id) }}', 'Barang')">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </td>
@@ -87,53 +87,5 @@
         $(document).ready(function() {
             new DataTable("#tabel-barang");
         })
-
-        function hapus(id) {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Lakukan panggilan AJAX untuk menghapus data
-                    $.ajax({
-                        url: '/barang/' + id, // Sesuaikan dengan URL delete di controller Anda
-                        type: 'DELETE',
-                        data: {
-                            _token: '{{ csrf_token() }}' // Sertakan token CSRF dalam data
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                Swal.fire({
-                                    title: "Deleted!",
-                                    text: "Your data has been deleted.",
-                                    icon: "success"
-                                }).then(() => {
-                                    // Redirect atau lakukan tindakan lain setelah penghapusan berhasil
-                                    location.reload();
-                                });
-                            } else {
-                                Swal.fire({
-                                    title: "Error",
-                                    text: "Failed to delete the data.",
-                                    icon: "error"
-                                });
-                            }
-                        },
-                        error: function() {
-                            Swal.fire({
-                                title: "Error",
-                                text: "Failed to delete the data.",
-                                icon: "error"
-                            });
-                        }
-                    });
-                }
-            });
-        }
     </script>
 @endpush
