@@ -7,6 +7,7 @@ use App\Http\Controllers\DataPeminjamController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PeminjamanBarangController;
 use App\Http\Middleware\Authenticate;
+use App\Models\PeminjamanBarang;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +36,4 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::resource('data_peminjam', DataPeminjamController::class);
 Route::resource('barang', BarangController::class);
 Route::resource('peminjaman_barang', PeminjamanBarangController::class);
+Route::patch('peminjaman_barang/pengembalian/{id}', [PeminjamanBarangController::class, 'pengembalian'])->name('pengembalian');

@@ -16,7 +16,7 @@ class PeminjamanBarangController extends Controller
     public function index()
     {
         $data['page_title'] = 'Peminjaman Barang';
-        $data['peminjaman_peminjaman'] = PeminjamanBarang::get();
+        $data['peminjaman_peminjaman'] = PeminjamanBarang::with(['peminjam', 'barang'])->orderBy('id', 'desc')->get();
         return view('peminjaman_barang.index', $data);
     }
 
@@ -125,6 +125,25 @@ class PeminjamanBarangController extends Controller
         try {
             $peminjaman_barang = PeminjamanBarang::find($id);
             $peminjaman_barang->delete();
+
+            DB::commit();
+
+            return response()->json(['success' => true]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json(['success' => false]);
+        }
+    }
+
+    public function pengembalian(string $id)
+    {
+        DB::beginTransaction();
+
+        try {
+            $pengembalian = PeminjamanBarang::find($id);
+            $pengembalian->status = 'Telah dikembalikan';
+            $pengembalian->tanggal_pengembalian = now()->toDateString();
+            $pengembalian->save();
 
             DB::commit();
 
