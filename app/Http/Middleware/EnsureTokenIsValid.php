@@ -19,6 +19,6 @@ class EnsureTokenIsValid
         if(Auth::check()) {
             return $next($request);
         }
-        return redirect()->route('login');
+        return redirect()->route('loginAdmin');
     }
 }

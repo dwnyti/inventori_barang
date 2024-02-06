@@ -23,11 +23,11 @@ use App\Http\Middleware\Authenticate;
 //     return view('login/login');
 // });
 
-Route::get('/', [LoginController::class, 'index'])->name('login');
+Route::get('/', [LoginController::class, 'index'])->name('loginAdmin')->middleware('isLogin');
 Route::post('/login-store', [LoginController::class, 'login'])->name('login.store');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('isLogin');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
 // Route::get('/data_peminjam', [DataPeminjamController::class, 'index'])->name('data_peminjam');
 // Route::get('/data_peminjam/create', [DataPeminjamController::class, 'create'])->name('data_peminjam.create');
