@@ -50,7 +50,7 @@
                   <a href="{{ route("data_peminjam.edit", $data->id) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" data-bs-title="Edit Data">
                     <i class="fas fa-edit"></i>
                   </a>
-                  <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-title="Delete Data" onclick="hapus('{{ $data->id }}')">
+                  <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-title="Delete Data" onclick="hapus('{{ route('data_peminjam.destroy', $data->id) }}', 'Peminjam')">
                     <i class="fas fa-trash"></i>
                   </button>    
                 </td>
@@ -70,53 +70,5 @@
     $(document).ready(function() {
       new DataTable("#data_peminjam");
     })
-
-    function hapus(id) {
-      Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // Lakukan panggilan AJAX untuk menghapus data
-          $.ajax({
-            url: '/data_peminjam/' + id, // Sesuaikan dengan URL delete di controller Anda
-            type: 'DELETE',
-            data: {
-              _token: '{{ csrf_token() }}' // Sertakan token CSRF dalam data
-            },
-            success: function(response) {
-              if (response.success) {
-                Swal.fire({
-                  title: "Deleted!",
-                  text: "Your data has been deleted.",
-                  icon: "success"
-                }).then(() => {
-                  // Redirect atau lakukan tindakan lain setelah penghapusan berhasil
-                  location.reload();
-                });
-              } else {
-                Swal.fire({
-                  title: "Error",
-                  text: "Failed to delete the data.",
-                  icon: "error"
-                });
-              }
-            },
-            error: function() {
-              Swal.fire({
-                title: "Error",
-                text: "Failed to delete the data.",
-                icon: "error"
-              });
-            }
-          });
-        }
-      });
-    }
   </script>
 @endpush

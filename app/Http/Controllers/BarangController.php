@@ -16,7 +16,7 @@ class BarangController extends Controller
     public function index()
     {
         $data['page_title'] = 'Barang';
-        $data['barang_barang'] = Barang::get();
+        $data['barang_barang'] = Barang::with('lokasi')->orderBy('id', 'asc')->get();
         return view('barang.index', $data);
     }
 

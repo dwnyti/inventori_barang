@@ -51,27 +51,34 @@
                                         <td>{{ $peminjaman->barang->kode_barang }}</td>
                                         <td>{{ $peminjaman->jumlah_pinjam }}</td>
                                         <td>
-                                            <span class="badge @if($peminjaman->status === 'Masih dipinjam') text-bg-warning @else text-bg-danger @endif">{{ $peminjaman->status }}</span>
+                                            <span
+                                                class="badge @if ($peminjaman->status === 'Masih dipinjam') text-bg-warning @else text-bg-success @endif">{{ $peminjaman->status }}</span>
                                         </td>
                                         <td>
-                                            <button class="btn btn-sm btn-info mb-1" data-bs-toggle="tooltip" title="Delete"
-                                                onclick="hapus('{{ $peminjaman->id }}')">
-                                                <i class="fas fa-box-archive"></i>
-                                            </button>
+                                            @if ($peminjaman->status === 'Masih dipinjam')
+                                                <button class="btn btn-sm btn-info mb-1" data-bs-toggle="tooltip"
+                                                    title="Pengembalian barang"
+                                                    onclick="barang_kembali('{{ $peminjaman->id }}', '{{ $peminjaman->barang->nama_barang }}', '{{ $peminjaman->peminjam->nama }}')">
+                                                    <i class="fas fa-box-archive"></i>
+                                                </button>
+                                            @endif
                                             <a href="{{ route('peminjaman_barang.show', $peminjaman->id) }}"
                                                 class="btn btn-sm btn-success mb-1" data-bs-toggle="tooltip"
                                                 title="Show Product">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('peminjaman_barang.edit', $peminjaman->id) }}"
-                                                class="btn btn-sm btn-warning mb-1" data-bs-toggle="tooltip"
-                                                title="Edit Product">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <button class="btn btn-sm btn-danger mb-1" data-bs-toggle="tooltip" title="Delete"
-                                                onclick="hapus('{{ $peminjaman->id }}')">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
+                                            @if ($peminjaman->status === 'Masih dipinjam')
+                                                <a href="{{ route('peminjaman_barang.edit', $peminjaman->id) }}"
+                                                    class="btn btn-sm btn-warning mb-1" data-bs-toggle="tooltip"
+                                                    title="Edit Product">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <button class="btn btn-sm btn-danger mb-1" data-bs-toggle="tooltip"
+                                                    title="Delete"
+                                                    onclick="hapus('{{ route('peminjaman_barang.destroy', $peminjaman->id) }}', 'Peminjaman Barang')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -87,55 +94,36 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            new DataTable("#tabel-peminjaman-barang");
+            new DataTable("#tabel-peminjaman-barang")
         })
 
-        function hapus(id) {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
+        // PENGEMBALIAN
+        async function barang_kembali(id, barang, peminjam) {
+            try {
+                const result = await Swal.fire({
+                    title: "Apakah Anda Yakin?",
+                    text: "Pastikan barang sudah kembali ke tempat semula.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#aaa",
+                    confirmButtonText: "Ya, kembalikan!"
+                });
+
                 if (result.isConfirmed) {
-                    // Lakukan panggilan AJAX untuk menghapus data
-                    $.ajax({
-                        url: '/peminjaman_barang/' + id, // Sesuaikan dengan URL delete di controller Anda
-                        type: 'DELETE',
-                        data: {
-                            _token: '{{ csrf_token() }}' // Sertakan token CSRF dalam data
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                Swal.fire({
-                                    title: "Deleted!",
-                                    text: "Your data has been deleted.",
-                                    icon: "success"
-                                }).then(() => {
-                                    // Redirect atau lakukan tindakan lain setelah penghapusan berhasil
-                                    location.reload();
-                                });
-                            } else {
-                                Swal.fire({
-                                    title: "Error",
-                                    text: "Failed to delete the data.",
-                                    icon: "error"
-                                });
-                            }
-                        },
-                        error: function() {
-                            Swal.fire({
-                                title: "Error",
-                                text: "Failed to delete the data.",
-                                icon: "error"
-                            });
-                        }
+                    const response = await axios.patch(`peminjaman_barang/pengembalian/${id}`, {
+                        _token: '{{ csrf_token() }}'
                     });
+
+                    if (response.data.success) {
+                        await swalTimerSuccess("Barang Dikembalikan!", `Barang ${barang} oleh ${peminjam} telah dikembalikan.`)
+                    } else {
+                        swalTimerError("Eror", `Gagal menghapus data ${name} ini.`, "error")
+                    }
                 }
-            });
+            } catch (error) {
+                swalTimerError("Eror", error, "error")
+            }
         }
     </script>
 @endpush
