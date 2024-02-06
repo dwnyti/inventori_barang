@@ -2,6 +2,11 @@
 
 @section('container')
 <div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      @include('alert.alert-message')
+    </div>
+  </div>
   <div class="card">
     <div class="card-header bg-primary">
       <h4 class="fw-bold">

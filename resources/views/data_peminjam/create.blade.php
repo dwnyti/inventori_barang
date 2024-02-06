@@ -2,6 +2,11 @@
 
 @section('container')
 <div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      @include('alert.alert-message')
+    </div>
+  </div>
   <div class="card">
     <div class="card-header bg-primary">
       <h4 class="fw-bold">
@@ -92,22 +97,5 @@
         kelasDiv.style.display = 'none';
     }
   });
-
-  // // Mendapatkan elemen dropdown status
-  // var statusDropdown = document.getElementById('status');
-
-  // // Mendapatkan elemen dengan id "kelas"
-  // var kelasDiv = document.getElementById('kelas');
-
-  // // Menambahkan event listener untuk memantau perubahan pada dropdown status
-  // statusDropdown.addEventListener('change', function() {
-  //   var selectedStatus = statusDropdown.value;
-
-  //   if (selectedStatus === 'siswa') {
-  //       kelasDiv.style.display = 'block';
-  //   } else {
-  //       kelasDiv.style.display = 'none';
-  //   }
-  // });
 </script>
 @endpush

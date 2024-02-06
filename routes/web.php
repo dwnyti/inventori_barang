@@ -27,11 +27,16 @@ Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/login-store', [LoginController::class, 'login'])->name('login.store');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('isLogin');
+Route::middleware(['isLogin'])->group(function () {
+    // route dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
-// Route::get('/data_peminjam', [DataPeminjamController::class, 'index'])->name('data_peminjam');
-// Route::get('/data_peminjam/create', [DataPeminjamController::class, 'create'])->name('data_peminjam.create');
+    // route data peminjam
+    Route::resource('data_peminjam', DataPeminjamController::class);
 
-Route::resource('data_peminjam', DataPeminjamController::class);
-Route::resource('barang', BarangController::class);
-Route::resource('peminjaman_barang', PeminjamanBarangController::class);
+    // route barang
+    Route::resource('barang', BarangController::class);
+
+    // route peminjam barang
+    Route::resource('peminjaman_barang', PeminjamanBarangController::class);
+});

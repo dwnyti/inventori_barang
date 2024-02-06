@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DataPeminjam;
-use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 class DataPeminjamController extends Controller
 {
@@ -40,21 +40,25 @@ class DataPeminjamController extends Controller
             'kelas' => 'required_if:status,Siswa'
         ]);
 
+        DB::beginTransaction();
+
         try {
             $data_peminjam = new DataPeminjam;
-            $data_peminjam->nama = $request->input('nama');
-            $data_peminjam->status = $request->input('status');
+            $data_peminjam->nama = $request->nama;
+            $data_peminjam->status = $request->status;
             
             if ($data_peminjam->status === 'Siswa') {
-                $data_peminjam->kelas = $request->input('kelas');
+                $data_peminjam->kelas = $request->kelas;
             } else {
                 $data_peminjam->kelas = "-";
             }
 
             $data_peminjam->save();
-            return redirect()->route('data_peminjam.index')->with('successCreateData', 'Data berhasil ditambahkan!');
+            DB::commit();
+            return redirect()->route('data_peminjam.index')->with('success', 'Data peminjam berhasil ditambahkan');
         } catch (\Throwable $th) {
-            return redirect()->route('data_peminjam.index')->with('failedCreateData', 'Data tidak berhasil ditambahkan!');
+            DB::rollBack();
+            return redirect()->back()->with('failed', $th->getMessage());
         }
     }
 
@@ -89,43 +93,40 @@ class DataPeminjamController extends Controller
             'kelas' => 'required_if:status,Siswa'
         ]);
 
+        DB::beginTransaction();
+
         try {
             $data_peminjam = DataPeminjam::findOrFail($id);
-            $data_peminjam->nama = $request->input('nama');
-            $data_peminjam->status = $request->input('status');
+            $data_peminjam->nama = $request->nama;
+            $data_peminjam->status = $request->status;
             
             if ($data_peminjam->status === 'Siswa') {
-                $data_peminjam->kelas = $request->input('kelas');
+                $data_peminjam->kelas = $request->kelas;
             } else {
                 $data_peminjam->kelas = '-';
             }
 
             $data_peminjam->save();
-            return redirect()->route('data_peminjam.index')->with('successEditData', 'Data berhasil diedit!');
+            DB::commit();
+            return redirect()->route('data_peminjam.index')->with('success', 'Data peminjam berhasil diedit');
         } catch (\Throwable $th) {
-            return redirect()->route('data_peminjam.index')->with('failedEditData', 'Data tidak berhasil diedit!');
+            DB::rollBack();
+            return redirect()->back()->with('failed', $th->getMessage());
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    // public function destroy(string $id)
-    // {
-    //     try {
-    //         DataPeminjam::destroy($id);
-    //         return response()->json(['success' => true]);
-    //     } catch (\Exception $e) {
-    //         return response()->json(['success' => false]);
-    //     }
-    // }
-
     public function destroy(string $id)
     {
+        DB::beginTransaction();
+
         try {
-            DataPeminjam::destroy($id);
+            $data_peminjam = DataPeminjam::find($id);
+            $data_peminjam->delete();
+
+            DB::commit();
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
+            DB::rollBack();
             return response()->json(['success' => false]);
         }
     }
