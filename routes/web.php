@@ -28,27 +28,16 @@ Route::get('/', [LoginController::class, 'index'])->name('loginAdmin')->middlewa
 Route::post('/login-store', [LoginController::class, 'login'])->name('login.store');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-<<<<<<< HEAD
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-=======
 Route::middleware(['isLogin'])->group(function () {
     // route dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
->>>>>>> dewi
 
     // route data peminjam
     Route::resource('data_peminjam', DataPeminjamController::class);
 
-<<<<<<< HEAD
-Route::resource('data_peminjam', DataPeminjamController::class);
-Route::resource('barang', BarangController::class);
-Route::resource('peminjaman_barang', PeminjamanBarangController::class);
-Route::patch('peminjaman_barang/pengembalian/{id}', [PeminjamanBarangController::class, 'pengembalian'])->name('pengembalian');
-=======
     // route barang
     Route::resource('barang', BarangController::class);
 
     // route peminjam barang
     Route::resource('peminjaman_barang', PeminjamanBarangController::class);
 });
->>>>>>> dewi
