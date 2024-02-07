@@ -74,7 +74,7 @@
           <a href="{{ route('logout') }}" class="nav-link" onclick="logout(event)">
             <i class="nav-icon fa-solid fa-right-from-bracket"></i>
             <p>
-              Logout
+              Keluar
             </p>
           </a>
           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -93,17 +93,22 @@
   function logout(event) {
     event.preventDefault();
     Swal.fire({
-      title: "Do you want to logout?",
+      title: "Keluar?",
       showDenyButton: true,
-      confirmButtonText: "Yes",
-      denyButtonText: `No`
+      confirmButtonText: "Ya, keluar!",
+      denyButtonText: `Tidak`
     })
     .then((result) => {
       if (result.isConfirmed) {
-        // Lakukan submit form secara manual
         document.getElementById('logout-form').submit();
       } else if (result.isDenied) {
-        Swal.fire("Logout canceled", "", "info");
+        Swal.fire({
+          title: "Tidak jadi keluar",
+          icon: "warning",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+        });
       }
     });
   }
