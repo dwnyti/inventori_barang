@@ -40,4 +40,5 @@ Route::middleware(['isLogin'])->group(function () {
 
     // route peminjam barang
     Route::resource('peminjaman_barang', PeminjamanBarangController::class);
+    Route::patch('/peminjaman_barang/pengembalian/{id}', [PeminjamanBarangController::class, 'pengembalian']);
 });
