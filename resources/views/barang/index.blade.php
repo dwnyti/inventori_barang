@@ -6,7 +6,13 @@
 @section('container')
     <div class="container-fluid">
         <div class="row">
+<<<<<<< HEAD
             <div class="col">@include('alert.alert-message')</div>
+=======
+            <div class="col">
+                @include('alert.alert-message')
+            </div>
+>>>>>>> dewi
         </div>
         <div class="card">
             <div class="card-header bg-primary">

@@ -1,18 +1,12 @@
-@if(session()->has('successCreateData'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-  Data Berhasil Ditambahkan
+  {{ session('success') }}
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
-@if(session()->has('successEditData'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-  Data Berhasil Diedit
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-@endif
-@if(session()->has('successDelete'))
+@if(session()->has('failed'))
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-  Data tidak berhasil diedit
+  {{ session('failed') }}
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif

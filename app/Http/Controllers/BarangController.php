@@ -37,7 +37,7 @@ class BarangController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'nama_barang' => 'required',
+            // 'nama_barang' => 'required',
             'kode_barang' => 'required|unique:barangs',
             'gambar_barang' => 'nullable',
             'jumlah' => 'required|numeric',
@@ -63,10 +63,10 @@ class BarangController extends Controller
             $barang->save();
 
             DB::commit();
-            return redirect()->route('barang.index')->with('successCreateData', 'Data berhasil ditambahkan!');
+            return redirect()->route('barang.index')->with('success', 'Data barang berhasil ditambahkan');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return redirect()->back()->with('failedCreateData', 'Data tidak berhasil ditambahkan!');
+            return redirect()->back()->with('failed', $th->getMessage());
         }
     }
 
@@ -127,10 +127,10 @@ class BarangController extends Controller
             $barang->save();
 
             DB::commit();
-            return redirect()->route('barang.index')->with('successCreateData', 'Data berhasil ditambahkan!');
+            return redirect()->route('barang.index')->with('success', 'Data barang berhasil diedit');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return redirect()->back()->with('failedCreateData', 'Data tidak berhasil ditambahkan!');
+            return redirect()->back()->with('failed', $th->getMessage());
         }
     }
 
