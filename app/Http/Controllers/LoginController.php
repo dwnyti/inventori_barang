@@ -27,7 +27,7 @@ class LoginController extends Controller
             return redirect()->route('dashboard.index');
             // dd("berhasil login");
         }else{
-            return redirect()->route('login')->with('failed', 'Username atau password salah');
+            return redirect()->route('loginAdmin')->with('failed', 'Username atau password salah');
         };
     }
 

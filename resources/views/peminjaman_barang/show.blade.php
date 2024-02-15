@@ -14,7 +14,7 @@
                         {{-- NAMA PEMINJAM --}}
                         <div class="mb-3">
                             <label for="peminjam_id" class="form-label">Nama Peminjam</label>
-                            <select id="peminjam_id" name="peminjam_id" class="form-select" disabled>
+                            <select id="peminjam_id" name="peminjam_id" class="form-control" disabled>
                                 <option value="" selected disabled>{{ $peminjaman_barang->peminjam->nama }}</option>
                             </select>
                         </div>
@@ -29,7 +29,7 @@
                         {{-- NAMA BARANG --}}
                         <div class="mb-3">
                             <label for="barang_id" class="form-label">Nama Barang</label>
-                            <select id="barang_id" name="barang_id" class="form-select" disabled>
+                            <select id="barang_id" name="barang_id" class="form-control" disabled>
                                 <option value="" selected disabled>{{ $peminjaman_barang->barang->nama_barang }}
                                 </option>
                             </select>

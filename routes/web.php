@@ -24,7 +24,7 @@ use App\Models\PeminjamanBarang;
 //     return view('login/login');
 // });
 
-Route::get('/', [LoginController::class, 'index'])->name('loginAdmin')->middleware('isLogin');
+Route::get('/', [LoginController::class, 'index'])->name('loginAdmin');
 Route::post('/login-store', [LoginController::class, 'login'])->name('login.store');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
