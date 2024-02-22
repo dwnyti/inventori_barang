@@ -25,17 +25,14 @@
                 <option value="Siswa" {{ $data_peminjam->status === 'Siswa' ? 'selected' : '' }}>Siswa</option>
               </select>
             </div>
-            <div class="mb-3" id="kelas" style="{{ $data_peminjam->status === 'Siswa' ? '' : 'display: none' }}">
-              <label for="kelas" class="form-label">Kelas</label>
-              <select class="form-control" aria-label="Default select example" name="kelas" disabled>
+            <div class="mb-3" id="kelas_id" style="{{ $data_peminjam->status === 'Siswa' ? '' : 'display: none' }}">
+              <label for="kelas_id" class="form-label">Kelas</label>
+              <select class="form-control" aria-label="Default select example" name="kelas_id" disabled>
                 <option value="" style="display: none"></option>
-                <option value="" selected disabled>Pilih Kelas</option>
-                <option value="X SIJA 1" {{ $data_peminjam->kelas === 'X SIJA 1' ? 'selected' : '' }}>X SIJA 1</option>
-                <option value="X SIJA 2" {{ $data_peminjam->kelas === 'X SIJA 2' ? 'selected' : '' }}>X SIJA 2</option>
-                <option value="XI SIJA 1" {{ $data_peminjam->kelas === 'XI SIJA 1' ? 'selected' : '' }}>XI SIJA 1</option>
-                <option value="XI SIJA 2" {{ $data_peminjam->kelas === 'XI SIJA 2' ? 'selected' : '' }}>XI SIJA 2</option>
-                <option value="XII SIJA 1" {{ $data_peminjam->kelas === 'XII SIJA 1' ? 'selected' : '' }}>XII SIJA 1</option>
-                <option value="XII SIJA 2" {{ $data_peminjam->kelas === 'XII SIJA 2' ? 'selected' : '' }}>XII SIJA 2</option>
+                <option value="" disabled>Pilih Kelas</option>
+                @foreach ($kelas_data as $kelas)
+                  <option value="{{ $kelas->id }}" {{ $kelas->id == $data_peminjam->id ? 'selected' : '' }}>{{ $kelas->nama_kelas }}</option>
+                @endforeach
               </select>
             </div>
           </div>

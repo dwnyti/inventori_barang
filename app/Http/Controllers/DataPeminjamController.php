@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\KelasData;
 use App\Models\DataPeminjam;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class DataPeminjamController extends Controller
@@ -14,7 +15,7 @@ class DataPeminjamController extends Controller
     public function index()
     {
         $data['page_title'] = 'Data Peminjam';
-        $data['data_peminjam'] = DataPeminjam::get();
+        $data['data_peminjam'] = DataPeminjam::with('kelas')->orderBy('id', 'asc')->get();
         return view('data_peminjam.index', $data);
     }
 
@@ -25,6 +26,7 @@ class DataPeminjamController extends Controller
     {
         $data['page_title'] = 'Tambah Data Peminjam';
         $data['data_peminjam'] = DataPeminjam::get();
+        $data['kelas_data'] = KelasData::get();
         return view('data_peminjam.create', $data);
     }
 
@@ -33,11 +35,10 @@ class DataPeminjamController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'nama' => 'required',
             'status' => 'required|in:Guru,Staff Tata Usaha,Siswa',
-            'kelas' => 'required_if:status,Siswa'
+            'kelas_id' => 'required_if:status,Siswa'
         ]);
 
         DB::beginTransaction();
@@ -48,9 +49,9 @@ class DataPeminjamController extends Controller
             $data_peminjam->status = $request->status;
             
             if ($data_peminjam->status === 'Siswa') {
-                $data_peminjam->kelas = $request->kelas;
+                $data_peminjam->kelas_id = $request->kelas_id;
             } else {
-                $data_peminjam->kelas = "-";
+                $data_peminjam->kelas_id = "-";
             }
 
             $data_peminjam->save();
@@ -69,6 +70,7 @@ class DataPeminjamController extends Controller
     {
         $data['page_title'] = 'Lihat Data Peminjam';
         $data['data_peminjam'] = DataPeminjam::findOrFail($id);
+        $data['kelas_data'] = KelasData::get();
         return view('data_peminjam.show', $data);
     }
 
@@ -79,6 +81,7 @@ class DataPeminjamController extends Controller
     {
         $data['page_title'] = 'Ubah Data Peminjam';
         $data['data_peminjam'] = DataPeminjam::findOrFail($id);
+        $data['kelas_data'] = KelasData::get();
         return view('data_peminjam.edit', $data);
     }
 
@@ -90,7 +93,7 @@ class DataPeminjamController extends Controller
         $request->validate([
             'nama' => 'required',
             'status' => 'required',
-            'kelas' => 'required_if:status,Siswa'
+            'kelas_id' => 'required_if:status,Siswa'
         ]);
 
         DB::beginTransaction();
@@ -101,9 +104,9 @@ class DataPeminjamController extends Controller
             $data_peminjam->status = $request->status;
             
             if ($data_peminjam->status === 'Siswa') {
-                $data_peminjam->kelas = $request->kelas;
+                $data_peminjam->kelas_id = $request->kelas_id;
             } else {
-                $data_peminjam->kelas = '-';
+                $data_peminjam->kelas_id = '-';
             }
 
             $data_peminjam->save();

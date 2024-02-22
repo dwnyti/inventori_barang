@@ -13,4 +13,8 @@ class DataPeminjam extends Model
     public function peminjaman_barang(){
         return $this->hasMany(PeminjamanBarang::class);
     }
+
+    public function kelas(){
+        return $this->belongsTo(KelasData::class, 'kelas_id');
+    }
 }

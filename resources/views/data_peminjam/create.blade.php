@@ -37,19 +37,16 @@
                 <span class="text-danger">{{ $message }}</span>
               @enderror
             </div>
-            <div class="mb-3" id="kelas" style="display: none">
-              <label for="kelas" class="form-label">Kelas</label>
-              <select class="form-select @error('kelas') is-invalid @enderror" aria-label="Default select example" name="kelas">
+            <div class="mb-3" id="kelas_id" style="display: none">
+              <label for="kelas_id" class="form-label">Kelas</label>
+              <select class="form-select @error('kelas_id') is-invalid @enderror" aria-label="Default select example" name="kelas_id">
                   <option value="" style="display: none"></option>
                   <option value="" disabled selected>Pilih Kelas</option>
-                  <option value="X SIJA 1" {{ old("kelas") == "X SIJA 1" ? "selected" : "" }}>X SIJA 1</option>
-                  <option value="X SIJA 2" {{ old("kelas") == "X SIJA 2" ? "selected" : "" }}>X SIJA 2</option>
-                  <option value="XI SIJA 1" {{ old("kelas") == "XI SIJA 1" ? "selected" : "" }}>XI SIJA 1</option>
-                  <option value="XI SIJA 2" {{ old("kelas") == "XI SIJA 2" ? "selected" : "" }}>XI SIJA 2</option>
-                  <option value="XII SIJA 1" {{ old("kelas") == "XII SIJA 1" ? "selected" : "" }}>XII SIJA 1</option>
-                  <option value="XII SIJA 2" {{ old("kelas") == "XII SIJA 2" ? "selected" : "" }}>XII SIJA 2</option>
+                  @foreach ($kelas_data as $kelas)
+                    <option value="{{ $kelas->id }}" {{ old("kelas_id") == $kelas->id ? "selected" : "" }}>{{ $kelas->nama_kelas }}</option>
+                  @endforeach
               </select>
-              @error('kelas')
+              @error('kelas_id')
                   <span class="text-danger">{{ $message }}</span>
               @enderror
             </div>
@@ -76,7 +73,7 @@
     var statusDropdown = document.getElementById('status');
       
     // Mendapatkan elemen dengan id "kelas"
-    var kelasDiv = document.getElementById('kelas');
+    var kelasDiv = document.getElementById('kelas_id');
       
     // Menambahkan event listener untuk memantau perubahan pada dropdown status
     statusDropdown.addEventListener('change', function () {

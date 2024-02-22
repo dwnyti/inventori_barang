@@ -38,19 +38,16 @@
                 <span class="text-danger">{{ $message }}</span>
               @enderror
             </div>
-            <div class="mb-3" id="kelas" style="{{ $data_peminjam->status === 'Siswa' ? '' : 'display: none' }}">
-              <label for="kelas" class="form-label">Kelas</label>
-              <select class="form-select" aria-label="Default select example" name="kelas">
+            <div class="mb-3" id="kelas_id" style="{{ $data_peminjam->status === 'Siswa' ? '' : 'display: none' }}">
+              <label for="kelas_id" class="form-label">Kelas</label>
+              <select class="form-select" aria-label="Default select example" name="kelas_id">
                 <option value="" style="display: none"></option>
                 <option value="" selected disabled>Pilih Kelas</option>
-                <option value="X SIJA 1" {{ $data_peminjam->kelas === 'X SIJA 1' ? 'selected' : '' }}>X SIJA 1</option>
-                <option value="X SIJA 2" {{ $data_peminjam->kelas === 'X SIJA 2' ? 'selected' : '' }}>X SIJA 2</option>
-                <option value="XI SIJA 1" {{ $data_peminjam->kelas === 'XI SIJA 1' ? 'selected' : '' }}>XI SIJA 1</option>
-                <option value="XI SIJA 2" {{ $data_peminjam->kelas === 'XI SIJA 2' ? 'selected' : '' }}>XI SIJA 2</option>
-                <option value="XII SIJA 1" {{ $data_peminjam->kelas === 'XII SIJA 1' ? 'selected' : '' }}>XII SIJA 1</option>
-                <option value="XII SIJA 2" {{ $data_peminjam->kelas === 'XII SIJA 2' ? 'selected' : '' }}>XII SIJA 2</option>
+                @foreach ($kelas_data as $kelas)
+                  <option value="{{ $kelas->id }}" {{ $kelas->id == $data_peminjam->id ? 'selected' : '' }}>{{ $kelas->nama_kelas }}</option>
+                @endforeach
               </select>
-              @error('kelas')
+              @error('kelas_id')
                 <span class="text-danger">{{ $message }}</span>
               @enderror
             </div>
@@ -77,7 +74,7 @@
     var statusDropdown = document.getElementById('status');
       
     // Mendapatkan elemen dengan id "kelas"
-    var kelasDiv = document.getElementById('kelas');
+    var kelasDiv = document.getElementById('kelas_id');
       
     // Menambahkan event listener untuk memantau perubahan pada dropdown status
     statusDropdown.addEventListener('change', function () {
@@ -98,21 +95,5 @@
         kelasDiv.style.display = 'none';
     }
   });
-  // // Mendapatkan elemen dropdown status
-  // var statusDropdown = document.getElementById('status');
-
-  // // Mendapatkan elemen dengan id "kelas"
-  // var kelasDiv = document.getElementById('kelas');
-
-  // // Menambahkan event listener untuk memantau perubahan pada dropdown status
-  // statusDropdown.addEventListener('change', function() {
-  //   var selectedStatus = statusDropdown.value;
-
-  //   if (selectedStatus === 'siswa') {
-  //       kelasDiv.style.display = 'block';
-  //   } else {
-  //       kelasDiv.style.display = 'none';
-  //   }
-  // });
 </script>
 @endpush

@@ -44,7 +44,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="{{ route('barang.index') }}" class="nav-link {{ request()->routeIs('barang.index') ? 'active' : '' }}">
+          <a href="{{ route('barang.index') }}" class="nav-link {{ request()->routeIs('barang*') ? 'active' : '' }}">
             <i class="nav-icon fa-solid fa-boxes-stacked"></i>
             <p>
               Data Barang
@@ -53,16 +53,16 @@
         </li>
 
         <li class="nav-item">
-          <a href="{{ route('data_peminjam.index') }}" class="nav-link {{ request()->routeIs('data_peminjam.index') ? 'active' : '' }}">
+          <a href="{{ route('data_peminjam.index') }}" class="nav-link {{ request()->routeIs('data_peminjam*') ? 'active' : '' }}">
             <i class="nav-icon fa-solid fa-user"></i>
             <p>
-              Data Peminjam Online
+              Data Peminjam
             </p>
           </a>
         </li>
 
         <li class="nav-item">
-          <a href="{{ route('peminjaman_barang.index') }}" class="nav-link {{ request()->routeIs('peminjaman_barang.index') ? 'active' : '' }}">
+          <a href="{{ route('peminjaman_barang.index') }}" class="nav-link {{ request()->routeIs('peminjaman_barang*') ? 'active' : '' }}">
             <i class="nav-icon fa-solid fa-boxes-packing"></i>
             <p>
               Peminjaman Barang
