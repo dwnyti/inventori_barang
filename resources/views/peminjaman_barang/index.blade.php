@@ -45,17 +45,17 @@
                                 @foreach ($peminjaman_peminjaman as $peminjaman)
                                     <tr class="text-center">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $peminjaman->peminjam->nama }}</td>
-                                        <td>{{ $peminjaman->peminjam->status }}</td>
-                                        <td>{{ $peminjaman->barang->nama_barang }}</td>
-                                        <td>{{ $peminjaman->barang->kode_barang }}</td>
+                                        <td>{{ $peminjaman->peminjam->nama ?? 'data peminjam telah dihapus' }}</td>
+                                        <td>{{ $peminjaman->peminjam->status ?? 'data peminjam telah dihapus' }}</td>
+                                        <td>{{ $peminjaman->barang->nama_barang ?? 'data barang telah dihapus' }}</td>
+                                        <td>{{ $peminjaman->barang->kode_barang ?? 'data barang telah dihapus' }}</td>
                                         <td>{{ $peminjaman->jumlah_pinjam }}</td>
                                         <td>
                                             <span
                                                 class="badge @if ($peminjaman->status === 'Masih dipinjam') text-bg-warning @else text-bg-success @endif">{{ $peminjaman->status }}</span>
                                         </td>
                                         <td>
-                                            @if ($peminjaman->status === 'Masih dipinjam')
+                                            @if ($peminjaman->status === 'Masih dipinjam' && $peminjaman->barang && $peminjaman->peminjam)
                                                 <button class="btn btn-sm btn-info mb-1" data-bs-toggle="tooltip"
                                                     title="Pengembalian barang"
                                                     onclick="barang_kembali('{{ $peminjaman->id }}', '{{ $peminjaman->barang->nama_barang }}', '{{ $peminjaman->peminjam->nama }}')">
@@ -68,11 +68,13 @@
                                                 <i class="fas fa-eye"></i>
                                             </a>
                                             @if ($peminjaman->status === 'Masih dipinjam')
-                                                <a href="{{ route('peminjaman_barang.edit', $peminjaman->id) }}"
-                                                    class="btn btn-sm btn-warning mb-1" data-bs-toggle="tooltip"
-                                                    title="Edit Product">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
+                                            @if ($peminjaman->barang)
+                                            <a href="{{ route('peminjaman_barang.edit', $peminjaman->id) }}"
+                                                class="btn btn-sm btn-warning mb-1" data-bs-toggle="tooltip"
+                                                title="Edit Product">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            @endif
                                                 <button class="btn btn-sm btn-danger mb-1" data-bs-toggle="tooltip"
                                                     title="Delete"
                                                     onclick="hapus('{{ route('peminjaman_barang.destroy', $peminjaman->id) }}', 'Peminjaman Barang')">

@@ -42,7 +42,7 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $data->nama }}</td>
                 <td>{{ $data->status }}</td>
-                <td>{{ $data->kelas->nama_kelas }}</td>
+                <td>{{ $data->kelas->nama_kelas ?? '-' }}</td>
                 <td>
                   <a href="{{ route("data_peminjam.show", $data->id) }}" class="btn btn-sm btn-success" data-bs-toggle="tooltip" data-bs-title="Show Data">
                     <i class="fas fa-eye"></i>

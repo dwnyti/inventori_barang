@@ -15,7 +15,7 @@
                         <div class="mb-3">
                             <label for="peminjam_id" class="form-label">Nama Peminjam</label>
                             <select id="peminjam_id" name="peminjam_id" class="form-control" disabled>
-                                <option value="" selected disabled>{{ $peminjaman_barang->peminjam->nama }}</option>
+                                <option value="" selected disabled>{{ $peminjaman_barang->peminjam->nama ?? 'data peminjam telah dihapus' }}</option>
                             </select>
                         </div>
 
@@ -23,14 +23,14 @@
                         <div class="mb-3">
                             <label for="jumlah_pinjam" class="form-label">Jumlah Pinjam Barang</label>
                             <input type="text" id="jumlah_pinjam" name="jumlah_pinjam" disabled class="form-control"
-                                value="{{ $peminjaman_barang->peminjam->status }}">
+                                value="{{ $peminjaman_barang->peminjam->status  ?? 'data peminjam telah dihapus' }}">
                         </div>
 
                         {{-- NAMA BARANG --}}
                         <div class="mb-3">
                             <label for="barang_id" class="form-label">Nama Barang</label>
                             <select id="barang_id" name="barang_id" class="form-control" disabled>
-                                <option value="" selected disabled>{{ $peminjaman_barang->barang->nama_barang }}
+                                <option value="" selected disabled>{{ $peminjaman_barang->barang->nama_barang ?? 'data barang telah dihapus' }}
                                 </option>
                             </select>
                         </div>
@@ -39,7 +39,7 @@
                         <div class="mb-3">
                             <label for="kode_barang" class="form-label">Kode Barang</label>
                             <input type="text" id="kode_barang" name="kode_barang" disabled class="form-control"
-                                value="{{ $peminjaman_barang->barang->kode_barang }}">
+                                value="{{ $peminjaman_barang->barang->kode_barang ?? 'data barang telah dihapus' }}">
                         </div>
                     </div>
                     <div class="col-md-6">

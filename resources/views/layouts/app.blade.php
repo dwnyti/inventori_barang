@@ -28,7 +28,7 @@
 
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; SMK Negeri 69 Jakarta</strong>
+            <strong>Copyright &copy; Bizhare Team from SMK Negeri 69 Jakarta</strong>
         </footer>
 
         <!-- Control Sidebar -->

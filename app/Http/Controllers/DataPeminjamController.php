@@ -50,8 +50,6 @@ class DataPeminjamController extends Controller
             
             if ($data_peminjam->status === 'Siswa') {
                 $data_peminjam->kelas_id = $request->kelas_id;
-            } else {
-                $data_peminjam->kelas_id = "-";
             }
 
             $data_peminjam->save();
@@ -105,8 +103,6 @@ class DataPeminjamController extends Controller
             
             if ($data_peminjam->status === 'Siswa') {
                 $data_peminjam->kelas_id = $request->kelas_id;
-            } else {
-                $data_peminjam->kelas_id = '-';
             }
 
             $data_peminjam->save();
