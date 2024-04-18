@@ -50,11 +50,11 @@ class DataPeminjamController extends Controller
             
             if ($data_peminjam->status === 'Siswa') {
                 $data_peminjam->kelas_id = $request->kelas_id;
-            }
+            } 
 
             $data_peminjam->save();
             DB::commit();
-            return redirect()->route('data_peminjam.index')->with('success', 'Data peminjam berhasil ditambahkan');
+            return redirect()->route('data_peminjam.index')->with('success', 'Data berhasil ditambahkan');
         } catch (\Throwable $th) {
             DB::rollBack();
             return redirect()->back()->with('failed', $th->getMessage());
@@ -103,11 +103,11 @@ class DataPeminjamController extends Controller
             
             if ($data_peminjam->status === 'Siswa') {
                 $data_peminjam->kelas_id = $request->kelas_id;
-            }
+            } 
 
             $data_peminjam->save();
             DB::commit();
-            return redirect()->route('data_peminjam.index')->with('success', 'Data peminjam berhasil diedit');
+            return redirect()->route('data_peminjam.index')->with('success', 'Data berhasil diedit');
         } catch (\Throwable $th) {
             DB::rollBack();
             return redirect()->back()->with('failed', $th->getMessage());

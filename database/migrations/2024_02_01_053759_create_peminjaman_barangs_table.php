@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('peminjaman_barangs', function (Blueprint $table) {
-            $table->id();
-            $table->integer('barang_id')->nullable();
-            $table->integer('peminjam_id')->nullable();
+            $table->uuid('id')->primary();
+            $table->uuid('barang_id')->nullable();
+            $table->uuid('peminjam_id')->nullable();
             $table->integer('jumlah_pinjam');
             $table->date('tanggal_pinjam');
             $table->date('tanggal_pengembalian')->nullable();

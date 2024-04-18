@@ -56,10 +56,10 @@ class PeminjamanBarangController extends Controller
             $dataPinjam->save();
 
             DB::commit();
-            return redirect()->route('peminjaman_barang.index')->with('successCreateData', 'Data berhasil ditambahkan!');
+            return redirect()->route('peminjaman_barang.index')->with('success', 'Data berhasil ditambahkan!');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return redirect()->back()->with('failedCreateData', 'Data tidak berhasil ditambahkan!');
+            return redirect()->back()->with('failed', $th->getMessage());
         }
     }
 
@@ -108,10 +108,10 @@ class PeminjamanBarangController extends Controller
             $dataPinjam->save();
 
             DB::commit();
-            return redirect()->route('peminjaman_barang.index')->with('successCreateData', 'Data berhasil ditambahkan!');
+            return redirect()->route('peminjaman_barang.index')->with('success', 'Data berhasil ditambahkan!');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return redirect()->back()->with('failedCreateData', 'Data tidak berhasil ditambahkan!');
+            return redirect()->back()->with('failed', $th->getMessage());
         }
     }
 

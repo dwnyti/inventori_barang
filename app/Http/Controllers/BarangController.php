@@ -63,7 +63,7 @@ class BarangController extends Controller
             $barang->save();
 
             DB::commit();
-            return redirect()->route('barang.index')->with('success', 'Data barang berhasil ditambahkan');
+            return redirect()->route('barang.index')->with('success', 'Data berhasil ditambahkan');
         } catch (\Throwable $th) {
             DB::rollBack();
             return redirect()->back()->with('failed', $th->getMessage());
@@ -127,7 +127,7 @@ class BarangController extends Controller
             $barang->save();
 
             DB::commit();
-            return redirect()->route('barang.index')->with('success', 'Data barang berhasil diedit');
+            return redirect()->route('barang.index')->with('success', 'Data berhasil diedit');
         } catch (\Throwable $th) {
             DB::rollBack();
             return redirect()->back()->with('failed', $th->getMessage());
